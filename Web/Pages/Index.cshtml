@@ -1,0 +1,16 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "User Form";
+}
+
+<form method="post">
+    <label>Name: <input asp-for="Name" /></label><br />
+    <label>Date of Birth: <input asp-for="Dob" type="date" /></label><br />
+    <label>Age: <input asp-for="Age" readonly /></label>
+    <button type="submit" formaction="?handler=CalculateAge">Calculate</button><br />
+    <label>Name Length: <input asp-for="NameLength" readonly /></label>
+    <button type="submit" formaction="?handler=NameLength">Get Name Length</button><br />
+    <button type="submit">Save</button>
+    <button type="submit" formaction="?handler=Console">Save</button>
+</form>
