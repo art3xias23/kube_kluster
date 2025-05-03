@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Diagnostics;
+using System.Runtime;
 
 namespace Api.Controllers
 {
@@ -7,6 +9,12 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class MainController : ControllerBase
     {
+        private readonly Settings _settings;
+        public MainController(IOptions<Settings> settings)
+        {
+            _settings = settings.Value;
+        }
+
         [HttpGet("Crash")]
         public IActionResult Crash()
         {
@@ -23,7 +31,6 @@ namespace Api.Controllers
         [HttpGet("Call")]
         public IActionResult Simple()
         {
-
             return Ok(new { message = "This went well." });
         }
 
@@ -31,11 +38,13 @@ namespace Api.Controllers
         public async Task<IActionResult> Console(string param)
         {
             var cw = Directory.GetCurrentDirectory();
+            var isContainer = System.IO.File.Exists("/.dockerenv");
+            System.Console.WriteLine($"isContainer: {isContainer}");
             var psi = new ProcessStartInfo()
             {
                 FileName = "dotnet",
                 Arguments = $" Console.dll {param}",
-                WorkingDirectory = Path.Combine(Directory.GetCurrentDirectory(), "bin", "Debug", "net9.0"),
+                WorkingDirectory = isContainer ? "./" : Path.Combine(Directory.GetCurrentDirectory(), "bin", "Debug", "net9.0"),
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -45,22 +54,21 @@ namespace Api.Controllers
             using var process = new Process { StartInfo = psi };
             process.Start();
 
-            // Read output asynchronously
             string output = await process.StandardOutput.ReadToEndAsync();
             string error = await process.StandardError.ReadToEndAsync();
 
             process.WaitForExit();
 
-            // Return both output and error for debugging
             return Ok(new { output, error });
         }
 
         [HttpGet("Second")]
         public async Task<IActionResult> Get()
         {
+            string apiUrl = Environment.GetEnvironmentVariable("SETTINGS__SECOND_API_URL");
             using var client = new HttpClient();
 
-            var response = await client.GetAsync("http://localhost:5179/Second/Get");
+            var response = await client.GetAsync($"{_settings.SECOND_API_URL}Second/Get");
 
             response.EnsureSuccessStatusCode();
 
@@ -75,7 +83,7 @@ namespace Api.Controllers
         {
             using var client = new HttpClient();
 
-            var response = await client.GetAsync($"http://localhost:5179/Second/GetParam?param={param}");
+            var response = await client.GetAsync($"{_settings.SECOND_API_URL}Second/GetParam?param={param}");
 
             response.EnsureSuccessStatusCode();
 
@@ -85,5 +93,5 @@ namespace Api.Controllers
 
         }
     }
-}
+    }
 

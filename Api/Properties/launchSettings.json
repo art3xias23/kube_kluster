@@ -3,10 +3,12 @@
     "http": {
       "commandName": "Project",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SETTINGS__SECOND_API_URL": "http://localhost:5179/"
       },
       "dotnetRunMessages": true,
-      "applicationUrl": "http://localhost:5245"
+      "applicationUrl": "http://localhost:5245",
+
     },
     "https": {
       "commandName": "Project",
