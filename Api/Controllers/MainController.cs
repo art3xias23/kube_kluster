@@ -43,12 +43,8 @@ namespace Api.Controllers
             var psi = new ProcessStartInfo()
             {
                 FileName = "dotnet",
-                Arguments = $" Console.dll {param}",
-                WorkingDirectory = isContainer ? "./" : Path.Combine(Directory.GetCurrentDirectory(), "bin", "Debug", "net9.0"),
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                CreateNoWindow = true
+                Arguments = $"Console/Console.dll {param}",
+                WorkingDirectory = "./",
             };
 
             using var process = new Process { StartInfo = psi };
