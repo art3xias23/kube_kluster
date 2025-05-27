@@ -1,6 +1,6 @@
 There are 2 dotnet apis and a console app.
 
-There is a LoadBalancer type kubernetes service called api which matched on all pods with labels app: api. 
+There is a LoadBalancer type kubernetes service called api which routes traffic to all pods with labels app: api. 
 
  - Such a pod is the Main Api. 
 
