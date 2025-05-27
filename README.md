@@ -12,6 +12,7 @@ Main api also has the ability to fire up the console app. Get the standard outpu
 This Main api speaks to api1 and the console app.
  
 ===============================================================
+
 Implementation 1 (Docker-compose) is done. 
 	- This is configured and its working with docker-compse.
 
