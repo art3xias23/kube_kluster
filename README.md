@@ -1,9 +1,14 @@
 There are 2 dotnet apis and a console app.
+
 There is a LoadBalancer type kubernetes service called api which matched on all pods with labels app: api. 
-	Such a pod is the Main Api. 
+
+ - Such a pod is the Main Api. 
+
 There is a second kubernetes service of type ClusterIP which routes traffic to all pods with label app: api2. 
-	Such a por is api2.
- Main api also has the ability to fire up the console app. Get the standard output and return it from the api. 
+- Such a por is api2.
+
+Main api also has the ability to fire up the console app. Get the standard output and return it from the api. 
+ 
 ===============================================================
 Implementation 1 (Docker-compose) is done. 
 	- This is configured and its working with docker-compse.
