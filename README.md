@@ -8,6 +8,8 @@ There is a second kubernetes service of type ClusterIP which routes traffic to a
 - Such a pod is api2.
 
 Main api also has the ability to fire up the console app. Get the standard output and return it from the api. 
+
+This Main api speaks to api1 and the console app.
  
 ===============================================================
 Implementation 1 (Docker-compose) is done. 
