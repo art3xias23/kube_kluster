@@ -14,7 +14,8 @@ This Main api speaks to api1 and the console app.
 ===============================================================
 
 Implementation 1 (Docker-compose) is done. 
-	- This is configured and its working with docker-compse.
+
+- This is configured and its working with docker-compse.
 
 
 Implementation 2(Kubernetes with Minikube) is complete. 
