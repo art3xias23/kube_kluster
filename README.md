@@ -1,13 +1,10 @@
-This is a playground for kubernetes
-
-There are 2 apis which speak to each other and then the first api has the ability to fire up the console app. Get the standard output and return it from the api. 
-
-I will also be adding a configuration file for harbor as that would be my local image registry
-
-I will also be adding k8s config files. The point is to understand the power of k8s and make the three aps talk to each other and also configure high availability. More specs will come later on as I dig deeper.
-
-=======================
-
+There are 2 dotnet apis and a console app.
+There is a LoadBalancer type kubernetes service called api which matched on all pods with labels app: api. 
+	Such a pod is the Main Api. 
+There is a second kubernetes service of type ClusterIP which routes traffic to all pods with label app: api2. 
+	Such a por is api2.
+ Main api also has the ability to fire up the console app. Get the standard output and return it from the api. 
+===============================================================
 Implementation 1 (Docker-compose) is done. 
 	- This is configured and its working with docker-compse.
 
