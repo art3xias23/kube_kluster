@@ -5,7 +5,7 @@ There is a LoadBalancer type kubernetes service called api which matched on all 
  - Such a pod is the Main Api. 
 
 There is a second kubernetes service of type ClusterIP which routes traffic to all pods with label app: api2. 
-- Such a por is api2.
+- Such a pod is api2.
 
 Main api also has the ability to fire up the console app. Get the standard output and return it from the api. 
  
